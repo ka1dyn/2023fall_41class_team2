@@ -134,7 +134,7 @@ const MainPage = () => {
                 style={{
                   backgroundColor: 'black',
                   height: '1px',
-                  width: 'calc(100vw - 500px)',
+                  width: '100%',
                   marginBottom: '60px',
                 }}
               />

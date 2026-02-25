@@ -126,7 +126,12 @@ function Calculator() {
                 disabled={isLoading} // 로딩 중일 때 버튼 비활성화
               >
                 {isLoading ? (
-                  <img className="spinner" src={Spinner} alt="Loading..." />
+                  <img
+                    className="spinner"
+                    src={Spinner}
+                    alt="Loading..."
+                    style={{ height: '15px' }}
+                  />
                 ) : (
                   'Calculate'
                 )}{' '}

@@ -21,7 +21,7 @@ services:
         "
         cd /docker-file
         && echo '@DEV:     build user-container image... (This takes a few minutes. Once run, the cache helps.)'
-        && docker build -t user-container -f Dockerfile.user . 2> user_container_build.log
+        && docker build -t user-container -f Dockerfile.production.user . 2> user_container_build.log
         && cd /app 
         && uvicorn main:app --host 0.0.0.0 --reload
         "

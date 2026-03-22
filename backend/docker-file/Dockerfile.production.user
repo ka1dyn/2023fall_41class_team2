@@ -1,0 +1,21 @@
+# 공식적으로 권장되는 Eclipse Temurin JDK 17 이미지를 사용 (Ubuntu 기반)
+FROM eclipse-temurin:17-jdk
+
+# 필요한 최소 패키지만 설치: Python3 및 GNU time (리소스 측정용)
+# --no-install-recommends를 사용하여 불필요한 패키지를 제외하고 용량 최적화
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+    python3 \
+    time && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+
+# 환경 변수 설정
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1
+
+# 데이터 작업 디렉토리 설정
+WORKDIR /user-data
+
+# 컨테이너 실행 시 기본 명령
+CMD ["python3"]

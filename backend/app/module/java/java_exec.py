@@ -48,6 +48,8 @@ class UserContainer:
         if not os.path.exists(user_path):
             os.makedirs(user_path)
 
+        print(f"check env: {self.CONTAINER_PROFILE_PATH}/{self.SCRIPT_FILE_NAME}")
+
         self.__shell_run(
             f"cp {self.CONTAINER_PROFILE_PATH}/{self.SCRIPT_FILE_NAME} {user_path}"
         )
@@ -79,12 +81,19 @@ class UserContainer:
             "python3": f"{self.USER_VOLUME_PATH}/{self.uid}/{self.SCRIPT_FILE_NAME} {self.uid}",
         }
 
+        print(docker_options)
+
         # run docker using host docker socket
         # DooD (Docker out of Docker)
         cmd = "docker run " + " ".join(f"{k} {v}" for k, v in docker_options.items())
         result = self.__shell_run(cmd)
 
-        print(f"@DEV:     Run user[{self.uid}] success")
+        if result.returncode != 0:
+            print(f"ERROR: Docker execution failed!")
+            print(f"STDOUT: {result.stdout}")
+            print(f"STDERR: {result.stderr}")
+        else:
+            print(f"@DEV:     Run user[{self.uid}] success")
 
     def read_results(self) -> dict:
         # read compile_stderr from user container volume

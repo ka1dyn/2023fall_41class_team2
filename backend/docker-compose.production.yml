@@ -1,0 +1,28 @@
+version: "3.8"
+
+services:
+  api-server:
+    build:
+      context: .
+      dockerfile: ./docker-file/Dockerfile.production
+    env_file:
+      - ./docker-env/docker.env.local
+      - ./docker-env/docker.env.user
+    ports:
+      - "8000:8000"
+    volumes:
+      - user-volumes:/user-data
+      - /var/run/docker.sock:/var/run/docker.sock
+    command: >
+        bash -c 
+        "
+        echo '@PROD:     pulling user-container image from registry...'
+        && docker pull ka1dyn/user-container
+        && docker tag ka1dyn/user-container user-container
+        && pwd 
+        && uvicorn main:app --host 0.0.0.0 --port 8000 --workers 4
+        "
+
+volumes:
+  user-volumes:
+    name: user-volumes

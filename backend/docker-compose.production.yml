@@ -2,9 +2,7 @@ version: "3.8"
 
 services:
   api-server:
-    build:
-      context: .
-      dockerfile: ./docker-file/Dockerfile.production
+    image: ka1dyn/ecode-backend:latest
     env_file:
       - ./docker-env/docker.env.local
       - ./docker-env/docker.env.user

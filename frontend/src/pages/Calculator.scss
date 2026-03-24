@@ -5,18 +5,26 @@
 
 .calculator {
   background-color: $calc-background-color;
-  padding: 0 250px;
+  display: flex;
+  justify-content: center;
 
   &_container {
     width: 100%;
+    max-width: 1200px;
     display: flex;
-    gap: 14px;
-    height: calc(100vh - #{$header-height});
+    flex-direction: column;
+    gap: 32px;
     padding: 30px 24px 100px 24px;
+
+    @media (min-width: $md-breakpoint) {
+      flex-direction: row;
+      gap: 14px;
+    }
   }
 
   &_code {
-    height: 100%;
+    min-width: 300px;
+    min-height: calc(100vh - #{$header-height} - #{$footer-height});
     overflow: hidden;
     position: relative;
     flex: 1;
@@ -104,7 +112,11 @@
       font-size: 28px;
       margin-bottom: 20px;
       font-family: 'Avenir', sans-serif;
-      text-align: end;
+      text-align: start;
+
+      @media(min-width: $md-breakpoint) {
+        text-align: end;
+      }
     }
 
     &_first {
@@ -114,7 +126,7 @@
 
     &_second {
       flex: 1;
-      min-height: 0;
+      min-height: 500px;
       display: flex;
       flex-direction: column;
       color: white;

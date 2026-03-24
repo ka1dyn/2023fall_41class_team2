@@ -10,11 +10,11 @@ import uuid
 app = FastAPI()
 
 origins = [
-    "http://ecode-buck.s3-website.ap-northeast-2.amazonaws.com",
-    "https://ecode.life",
-    "http://localhost",
+    "https://ecode.ka1dyn.com",
+    "https://www.ecode.ka1dyn.com",
     "http://localhost:5173",
     "http://127.0.0.1:5173",
+    "http://localhost:4173",
 ]
 
 app.add_middleware(

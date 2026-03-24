@@ -29,6 +29,16 @@ import prettier from 'prettier/standalone';
 import javaPlugin from 'prettier-plugin-java';
 import { DEFAULT_CODE } from '@/constants/MainCode';
 
+const truncateByChars = (text: string, maxLength = 20000) => {
+  if (!text) return text;
+
+  if (text.length > maxLength) {
+    return text.slice(0, maxLength) + '\n\n... (생략) ...';
+  }
+
+  return text;
+};
+
 const getFormattedCode = async (code: string) => {
   const formattedCode: string = await prettier.format(code, {
     parser: 'java',
@@ -198,13 +208,13 @@ function Calculator() {
                 <span className="static-text">Output of the process</span>
                 <br></br>
                 <br></br>
-                {result.runtime_stdout}
+                {truncateByChars(result.runtime_stdout)}
               </div>
               <div className="calculator_result_second_item">
                 <span className="static-text">Error of process</span>
                 <br></br>
                 <br></br>
-                {result.runtime_stderr}
+                {truncateByChars(result.runtime_stderr)}
               </div>
             </div>
           </div>

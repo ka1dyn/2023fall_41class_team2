@@ -10,13 +10,14 @@
 
   &_container {
     width: 100%;
-    max-width: 1200px;
+    max-width: 70vw;
     display: flex;
     flex-direction: column;
     gap: 32px;
-    padding: 30px 24px 100px 24px;
+    padding: 30px 24px 40px 24px;
 
     @media (min-width: $md-breakpoint) {
+      height: calc(100vh - #{$header-height} - #{$footer-height});
       flex-direction: row;
       gap: 14px;
     }
@@ -30,6 +31,10 @@
     flex: 1;
     display: flex;
     flex-direction: column;
+
+    @media (min-width: $md-breakpoint) {
+      min-height: 0;
+    }
   }
 
   &_code_title {
@@ -41,7 +46,7 @@
   &_code_input {
     flex: 1;
     position: relative;
-    border-radius: 20px;
+    border-radius: 8px;
     overflow: hidden;
 
     .cm-editor {
@@ -125,15 +130,18 @@
     }
 
     &_second {
-      flex: 1;
-      min-height: 500px;
+      height: 500px;
       display: flex;
       flex-direction: column;
       color: white;
 
+      @media(min-width: $md-breakpoint) { 
+        flex: 1;
+        min-height: 0;
+      }
+
       &_item {
         flex: 1;
-        overflow: scroll;
         overflow: auto; // 스크롤바가 필요할 때만 보이도록 설정
         padding: 10px;
         border: 3px solid;
